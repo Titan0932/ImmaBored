@@ -27,7 +27,14 @@ public class GUI extends Application {
         view.getGenerateButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                view.update();
+                view.updateGenerate();
+            }
+        });
+
+        view.getSaveButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                view.updateSave();
             }
         });
     }
