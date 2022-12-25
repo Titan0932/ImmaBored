@@ -27,6 +27,8 @@ public class View extends Pane {
     private final VBox vbox;
     private Map<String, Object> curActivity;
     private TableView myActivitiesTable;
+    private String activeStyle="-fx-font: 14 Georgia; -fx-font-weight: 300 ; -fx-base: #75B9BE; -fx-text-fill: #000000; -fx-border-color:#75B9BE; -fx-border-radius: 5 ";
+    private String inactiveStyle="-fx-font: 14 Georgia; -fx-base: #545E75; -fx-text-fill: #000000; -fx-border-radius: 5 ";
 
     public View(){
         double VIEWWIDTH, VIEWHEIGHT, DATAWINDOW_WIDTH, DATAWINDOW_HEIGHT, VIEW_LEFTPADDING, VIEW_RIGHTPADDING;
@@ -37,7 +39,6 @@ public class View extends Pane {
         DATAWINDOW_HEIGHT=640;
         DATAWINDOW_WIDTH=VIEWWIDTH-VIEW_LEFTPADDING-VIEW_RIGHTPADDING;
         String TABLECOLUMN_STYLES= "-fx-background-color: #545E75; -fx-border-color: #75B9BE; -fx-text-fill: #FFFFFF; -fx-wrap-text: true;";
-
 
 
         rList = new ListView<String>();
@@ -142,7 +143,7 @@ public class View extends Pane {
 
         generateWindowBtn.setPrefSize(100,30);
         generateWindowBtn.setPadding(new Insets(3d,1d,4d,1d));
-        generateWindowBtn.setStyle("-fx-font: 14 Georgia; -fx-font-weight: 300 ; -fx-base: #75B9BE; -fx-text-fill: #000000; -fx-border-color:#75B9BE; -fx-border-radius: 5 ");
+        generateWindowBtn.setStyle(activeStyle);
         generateWindowBtn.relocate(VIEWWIDTH-VIEW_RIGHTPADDING-100-50-10,40);
 
         myActivitiesBtn= new Button();
@@ -154,7 +155,7 @@ public class View extends Pane {
         bookmarkImgView.setScaleX(2);
         bookmarkImgView.setScaleY(2);
         myActivitiesBtn.setGraphic(bookmarkImgView);
-        myActivitiesBtn.setStyle("-fx-base: #545E75;");
+        myActivitiesBtn.setStyle(inactiveStyle);
         myActivitiesBtn.setPrefSize(20,30);
         myActivitiesBtn.relocate(VIEWWIDTH-VIEW_RIGHTPADDING-50,40);
 
@@ -304,6 +305,8 @@ public class View extends Pane {
         this.generateBtn.setVisible(true);
         this.saveBtn.setVisible(true);
         this.delDataBtn.setVisible(false);
+        this.generateWindowBtn.setStyle(activeStyle);
+        this.myActivitiesBtn.setStyle(inactiveStyle);
     };
 
     public void updateBookmarkWindow(){
@@ -311,6 +314,8 @@ public class View extends Pane {
         this.saveBtn.setVisible(false);
         this.delDataBtn.setVisible(true);
         this.generateBtn.setVisible(false);
+        this.generateWindowBtn.setStyle(inactiveStyle);
+        this.myActivitiesBtn.setStyle(activeStyle);
         String sqlCommand= "SELECT * FROM public.activities";
         try{
             ResultSet rows= this.getSQLReq(sqlCommand);
