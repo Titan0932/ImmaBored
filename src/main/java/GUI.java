@@ -3,7 +3,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
@@ -37,6 +36,36 @@ public class GUI extends Application {
                 view.updateSave();
             }
         });
+
+        view.getMyActivitiesBtn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                view.updateBookmarkWindow();
+            }
+        });
+
+        view.getGenerateWindowBtn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                view.updateGenerateWindow();
+            }
+        });
+
+        view.getDeleteBtn().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                view.updateDeleteRow();
+            }
+        });
+
+        view.getMyActivitiesTable().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                view.getDeleteBtn().setDisable(false);
+            } else {
+                view.getDeleteBtn().setDisable(true);
+            }
+        });
+
     }
 
 
